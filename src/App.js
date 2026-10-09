@@ -13,9 +13,12 @@ const defaultTodos = [
 ];
 
 function App() {
+  const completedTodos = defaultTodos.filter((todo) => todo.completed).length;
+  const totalTodos = defaultTodos.length;
+
   return (
     <>
-      <TodoCounter completed={16} total={25} />
+      <TodoCounter completed={completedTodos} total={totalTodos} />
       <TodoSearch />
 
       <TodoList>

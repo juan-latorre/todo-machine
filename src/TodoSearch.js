@@ -2,8 +2,8 @@ import "./TodoSearch.css";
 function TodoSearch() {
   return (
     <input
-      placeholder="Prepare Development Environment (React JS)"
       className="TodoSearch"
+      placeholder="Prepare Development Environment (React JS)"
     />
   );
 }
