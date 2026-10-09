@@ -1,10 +1,9 @@
+import React from "react";
 import { TodoCounter } from "./TodoCounter";
 import { TodoItem } from "./TodoItem";
 import { TodoList } from "./TodoList";
 import { TodoSearch } from "./TodoSearch";
 import { CreateTodoButton } from "./CreateTodoButton";
-import "./App.css";
-import React from "react";
 
 const defaultTodos = [
   { text: "Prepare Development React JS Environment", completed: true },
@@ -15,7 +14,7 @@ const defaultTodos = [
 
 function App() {
   return (
-    <React.Fragment>
+    <>
       <TodoCounter completed={16} total={25} />
       <TodoSearch />
 
@@ -30,7 +29,7 @@ function App() {
       </TodoList>
 
       <CreateTodoButton />
-    </React.Fragment>
+    </>
   );
 }
 
