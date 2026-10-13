@@ -10,19 +10,26 @@ const defaultTodos = [
   { text: "Take React.js Introductory Course", completed: false },
   { text: "Execute npm start command on console", completed: false },
   { text: "Check the App on Browser", completed: false },
+  { text: "Use derived states", completed: true },
 ];
 
 function App() {
-  const completedTodos = defaultTodos.filter((todo) => todo.completed).length;
-  const totalTodos = defaultTodos.length;
+  //State in React.js is immutable
+  const [todos, setTodos] = React.useState(defaultTodos);
+  const [searchValue, setSearchValue] = React.useState("");
+
+  const completedTodos = todos.filter((todo) => todo.completed).length;
+  const totalTodos = todos.length;
+
+  console.log("Users find all of " + searchValue);
 
   return (
     <>
       <TodoCounter completed={completedTodos} total={totalTodos} />
-      <TodoSearch />
+      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
 
       <TodoList>
-        {defaultTodos.map((todo) => (
+        {todos.map((todo) => (
           <TodoItem
             key={todo.text}
             text={todo.text}

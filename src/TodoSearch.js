@@ -1,19 +1,12 @@
-import React from "react";
 import "./TodoSearch.css";
 
-function TodoSearch() {
-  const [searchValue, setSearchValue] = React.useState("");
-
-  console.log("Users find all of " + searchValue);
-
+function TodoSearch({ searchValue, setSearchValue }) {
   return (
     <input
       className="TodoSearch"
       placeholder="Prepare Development Environment (React JS)"
       value={searchValue}
-      onChange={(event) => {
-        setSearchValue(event.target.value);
-      }}
+      onChange={(event) => setSearchValue(event.target.value)}
     />
   );
 }
