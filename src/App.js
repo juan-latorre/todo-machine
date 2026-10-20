@@ -42,7 +42,7 @@ function App() {
   // del estado "todos" en cada render. Si "todos" cambia, estos valores
   // se recalculan solos y nunca pueden quedar desincronizados.
   const completedTodos = todos.filter((todo) => todo.completed).length; // cuántas completadas
-  const totalTodos = todos.length;                                      // cuántas en total
+  const totalTodos = todos.length; // cuántas en total
 
   // Estado derivado del buscador: a partir de "todos" y "searchValue",
   // devuelve solo las tareas cuyo texto contiene lo que el usuario escribió.
@@ -56,7 +56,22 @@ function App() {
 
   // Log de depuración: imprime en la consola del navegador lo que se busca.
   // Útil durante el curso para ver cómo cambia searchValue en cada render.
-  console.log("Users find all of " + searchValue);
+  //console.log("Users find all of " + searchValue);
+
+  //Esta función espera un parámetro (text), saca una copia de "todos"
+  const completeTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.text == text);
+    newTodos[todoIndex].completed = true;
+    setTodos(newTodos);
+  };
+
+  const deleteTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.text == text);
+    newTodos.splice(todoIndex, 1);
+    setTodos(newTodos);
+  };
 
   // JSX que describe la interfaz. React lo convierte en elementos del DOM.
   // El fragmento <> </> permite devolver varios elementos sin envolverlos
@@ -80,6 +95,8 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
