@@ -1,4 +1,4 @@
-# Repositorio base Introduction to React.js
+# Base Repository Introduction to React.js
 
 Hello, React.js learner!
 
