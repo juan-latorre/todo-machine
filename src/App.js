@@ -13,17 +13,29 @@ import { CreateTodoButton } from "./CreateTodoButton";
 // Cada tarea es un objeto con dos propiedades:
 //   - text: el texto que verá el usuario.
 //   - completed: true si ya está hecha, false si está pendiente.
-const defaultTodos = [
-  { text: "Prepare Development React JS Environment", completed: true },
-  { text: "Take React.js Introductory Course", completed: false },
-  { text: "Execute npm start command on console", completed: false },
-  { text: "Check the App on Browser", completed: false },
-  { text: "Use derived states", completed: true },
-];
+
+// const defaultTodos = [
+//  { text: "Prepare Development React JS Environment", completed: true },
+//  { text: "Take React.js Introductory Course", completed: false },
+//  { text: "Execute npm start command on console", completed: false },
+//  { text: "Check the App on Browser", completed: false },
+//  { text: "Use derived states", completed: true },
+// ];
 
 // Componente principal de la aplicación. Devuelve toda la interfaz
 // y maneja el estado global (lista de tareas y texto del buscador).
 function App() {
+  const localStorageTodos = localStorage.getItem("TODOS_V1");
+
+  let parsedTodos;
+
+  if (!localStorageTodos) {
+    localStorage.setItem("TODOS_V1", JSON.stringify([]));
+    parsedTodos = [];
+  } else {
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
   // El estado en React es inmutable: nunca se modifica directamente.
   // Siempre se cambia llamando al setter (setTodos, setSearchValue),
   // que es lo que hace que React vuelva a dibujar el componente.
@@ -31,7 +43,7 @@ function App() {
   // ESTADO 1: la lista de tareas.
   //   - todos: la lista actual (arranca en defaultTodos).
   //   - setTodos: función para reemplazar la lista.
-  const [todos, setTodos] = React.useState(defaultTodos);
+  const [todos, setTodos] = React.useState(parsedTodos);
 
   // ESTADO 2: el texto escrito en el buscador.
   //   - searchValue: lo que hay escrito ahora en el input (arranca vacío).
@@ -54,6 +66,12 @@ function App() {
     return todoText.includes(searchText);
   });
 
+  const saveTodos = (newTodos) => {
+    localStorage.setItem("TODOS_V1", JSON.stringify(newTodos));
+
+    setTodos(newTodos);
+  };
+
   // Log de depuración: imprime en la consola del navegador lo que se busca.
   // Útil durante el curso para ver cómo cambia searchValue en cada render.
   //console.log("Users find all of " + searchValue);
@@ -63,14 +81,14 @@ function App() {
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex((todo) => todo.text == text);
     newTodos[todoIndex].completed = true;
-    setTodos(newTodos);
+    saveTodos(newTodos);
   };
 
   const deleteTodo = (text) => {
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex((todo) => todo.text == text);
     newTodos.splice(todoIndex, 1);
-    setTodos(newTodos);
+    saveTodos(newTodos);
   };
 
   // JSX que describe la interfaz. React lo convierte en elementos del DOM.
