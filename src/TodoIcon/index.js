@@ -1,4 +1,3 @@
-import React from "react";
 import { ReactComponent as CheckSVG } from "./check.svg";
 import { ReactComponent as DeleteSVG } from "./delete.svg";
 import "./TodoIcon.css";
@@ -13,10 +12,7 @@ const iconTypes = {
 // onClick se dispara al hacer clic sobre el contenedor.
 function TodoIcon({ type, color, onClick }) {
   return (
-    <span
-      className={`Icon-container Icon-container-${type}`}
-      onClick={onClick}
-    >
+    <span className={`Icon-container Icon-container-${type}`} onClick={onClick}>
       {iconTypes[type](color)}
     </span>
   );
