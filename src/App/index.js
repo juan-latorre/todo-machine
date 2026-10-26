@@ -27,12 +27,20 @@ function App() {
   //   - saveTodos: setter that writes the new list to localStorage and updates
   //     the React state in one step.
   // const [todos, setTodos] = React.useState(parsedTodos); // previous version
-  const [todos, saveTodos] = useLocalStorage("TODOS_V1", []);
+  //const [todos, saveTodos] = useLocalStorage("TODOS_V1", []);
 
   // STATE 2: the text typed in the search box.
   //   - searchValue: the current input value (starts empty).
   //   - setSearchValue: setter called on every keystroke.
   // const [searchValue, setSearchValue] = React.useState(""); // previous version
+  //const [searchValue, setSearchValue] = React.useState("");
+
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error,
+  } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = React.useState("");
 
   // DERIVED STATE: not stored with useState. Recomputed from "todos" on every
@@ -59,7 +67,7 @@ function App() {
   // by text, sets its "completed" flag and persists the new list.
   const completeTodo = (text) => {
     const newTodos = [...todos];
-    const todoIndex = newTodos.findIndex((todo) => todo.text == text);
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
     newTodos[todoIndex].completed = true;
     saveTodos(newTodos);
   };
@@ -68,13 +76,15 @@ function App() {
   // it with splice, and persist the new list.
   const deleteTodo = (text) => {
     const newTodos = [...todos];
-    const todoIndex = newTodos.findIndex((todo) => todo.text == text);
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
     newTodos.splice(todoIndex, 1);
     saveTodos(newTodos);
   };
 
   return (
     <AppUI
+      loading={loading}
+      error={error}
       completedTodos={completedTodos}
       totalTodos={totalTodos}
       searchValue={searchValue}
