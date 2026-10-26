@@ -4,22 +4,22 @@
   justify-content: center;
   align-items: center;
   margin-top: 24px;
-  box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.15);
-  border-radius: 10px;
-  padding: 12px 0;
+  background-color: #ffffff; /* Fondo estático para que resalten los placeholders */
+  box-shadow: 0px 4px 16px rgba(32, 35, 41, 0.08);
+  border-radius: 12px;
+  padding: 16px 12px;
+  overflow: hidden;
 }
 
 .LoadingTodo-text {
-  margin: 24px 0 24px 24px;
+  height: 16px;
   width: calc(100% - 120px);
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 400;
+  margin: 16px 0 16px 20px;
+  border-radius: 8px;
 }
 
 .LoadingTodo-completeIcon,
 .LoadingTodo-deleteIcon {
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,36 +27,32 @@
   height: 48px;
   width: 48px;
 }
+
 .LoadingTodo-completeIcon {
   position: absolute;
   left: 12px;
 }
+
 .LoadingTodo-deleteIcon {
   position: absolute;
   top: -24px;
   right: 0;
 }
 
-.LoadingTodo-container,
+/* Efecto de destello únicamente en las partes que simulan datos */
 .LoadingTodo-completeIcon,
-.LoadingTodo-deleteIcon {
-  background: linear-gradient(
-    90deg,
-    rgba(250, 250, 250, 1),
-    rgb(200, 199, 199)
-  );
-  background-size: 400% 400%;
-  animation: loadingAnimation 3s ease-in-out infinite;
+.LoadingTodo-deleteIcon,
+.LoadingTodo-text {
+  background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
 }
 
-@keyframes loadingAnimation {
+@keyframes shimmer {
   0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    background-position: 200% 0;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: -200% 0;
   }
 }

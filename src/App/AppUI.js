@@ -40,9 +40,9 @@ function AppUI({
       <TodoList>
         {loading && (
           <>
-            <TodosLoading />
-            <TodosLoading />
-            <TodosLoading />
+            <TodosLoading width="85%" />
+            <TodosLoading width="60%" />
+            <TodosLoading width="75%" />
           </>
         )}
         {error && <TodosError />}
