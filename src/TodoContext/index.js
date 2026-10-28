@@ -11,7 +11,7 @@ function TodoProvider({ children }) {
     error,
   } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = React.useState("");
-  const [openModal, setOpenModal] = React.useState(true);
+  const [openModal, setOpenModal] = React.useState(false);
 
   // DERIVED STATE: not stored with useState. Recomputed from "todos" on every
   // render. If "todos" changes, these values are recalculated automatically
@@ -27,6 +27,15 @@ function TodoProvider({ children }) {
     const searchText = searchValue.toLowerCase();
     return todoText.includes(searchText);
   });
+
+  const addTodo = (text) => {
+    const newTodos = [...todos];
+    newTodos.push({
+      text,
+      completed: false,
+    });
+    saveTodos(newTodos);
+  };
 
   const completeTodo = (text) => {
     const newTodos = [...todos];
@@ -53,6 +62,7 @@ function TodoProvider({ children }) {
         totalTodos,
         searchValue,
         setSearchValue,
+        addTodo,
         searchedTodos,
         completeTodo,
         deleteTodo,
