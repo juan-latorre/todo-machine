@@ -1,22 +1,6 @@
 import React from "react";
 
-// Custom hook: persists any piece of state in the browser's localStorage.
-// Behaves like React.useState, but also reads from and writes to localStorage
-// so the value survives page reloads.
-//
-// Parameters:
-//   - itemName: the key under which the value is stored in localStorage.
-//   - initialValue: the value to use the first time (when nothing is stored yet).
-//
-// Returns [item, saveItem]:
-//   - item: the current value.
-//   - saveItem: a setter that updates both the React state and localStorage.
-//   - loading:
-//   - error:
 function useLocalStorage(itemName, initialValue) {
-  // Read whatever is stored under itemName. Returns null if nothing is stored.
-  //const localStorageItem = localStorage.getItem(itemName);
-  // Local React state seeded with whatever we loaded (or just stored).
   const [item, setItem] = React.useState(initialValue);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(false);
@@ -62,3 +46,14 @@ function useLocalStorage(itemName, initialValue) {
 }
 
 export { useLocalStorage };
+
+// const defaultTodos = [
+//  { text: "Prepare Development React JS Environment", completed: true },
+//  { text: "Take React.js Introductory Course", completed: false },
+//  { text: "Execute npm start command on console", completed: false },
+//  { text: "Check the App on Browser", completed: false },
+//  { text: "Use derived states", completed: true },
+// ];
+
+// localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
+// localStorage.removeItem('TODOS_V1');
