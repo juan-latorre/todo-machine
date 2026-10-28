@@ -11,6 +11,7 @@ function TodoProvider({ children }) {
     error,
   } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = React.useState("");
+  const [openModal, setOpenModal] = React.useState(true);
 
   // DERIVED STATE: not stored with useState. Recomputed from "todos" on every
   // render. If "todos" changes, these values are recalculated automatically
@@ -55,6 +56,8 @@ function TodoProvider({ children }) {
         searchedTodos,
         completeTodo,
         deleteTodo,
+        openModal,
+        setOpenModal,
       }}
     >
       {children}
