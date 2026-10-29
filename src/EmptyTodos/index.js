@@ -1,5 +1,5 @@
 function EmptyTodos() {
-  return <p>¡Crea tu primer TODO!</p>;
+  return <p>¡Add your first TODO!</p>;
 }
 
 export { EmptyTodos };
