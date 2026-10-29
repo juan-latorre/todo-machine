@@ -7,7 +7,7 @@ function TodoSearch() {
   return (
     <input
       className="TodoSearch"
-      placeholder="Prepare Development Environment (React JS)"
+      placeholder="🔍 Search your TODOs"
       value={searchValue}
       onChange={(event) => setSearchValue(event.target.value)}
     />
